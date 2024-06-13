@@ -6,8 +6,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 
 import de.jonas.gamingloungemcplugin.customitems.Telepad;
+import de.jonas.gamingloungemcplugin.quests.CraftTelepadQuest;
 import de.jonas.stuff.Stuff;
 import de.jonas.stuff.interfaced.ClickEvent;
 import de.jonas.stuff.utility.PagenationInventory;
@@ -45,7 +47,13 @@ public class Events {
             removeItem(inv, 4, Material.DIAMOND) &&
             removeItem(inv, 1, Material.COMPASS) &&
             removeItem(inv, 1, Material.ENDER_EYE)
-            ) inv.addItem(new Telepad().getItem());
+            ) {
+                inv.addItem(new Telepad().getItem());
+                if (
+                    p.getPersistentDataContainer().has(CraftTelepadQuest.onQuest) &&
+                    p.getPersistentDataContainer().get(CraftTelepadQuest.onQuest, PersistentDataType.BOOLEAN) == true
+                ) CraftTelepadQuest.complete(p);
+            }
         else noMaterials(p);
     }
 

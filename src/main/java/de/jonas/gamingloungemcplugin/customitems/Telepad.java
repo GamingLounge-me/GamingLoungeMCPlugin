@@ -8,27 +8,21 @@ import de.jonas.stuff.utility.ItemBuilder;
 
 public class Telepad {
 
-
-    Material material;
-    String name;
-
     public Telepad() {
-        material = Material.BEACON;
-        name = "Telepad";
     }
 
-    public ItemStack getItem() {
+    public static ItemStack getItem() {
         return new ItemBuilder()
-        .setMaterial(material)
-        .setName(name)
+        .setMaterial(Material.BEACON)
+        .setName("Telepad")
         .whenPlaced("telepads:buildTelepad")
         .build();
     }
 
-    public ItemStack getItemForGui() {
+    public static ItemStack getItemForGui() {
         return new ItemBuilder()
-        .setMaterial(material)
-        .setName(name)
+        .setMaterial(Material.BEACON)
+        .setName("Telepad")
         .addLoreLine("Material kosten:")
         .addLoreLine("4x Diamant")
         .addLoreLine("1x Compass")
