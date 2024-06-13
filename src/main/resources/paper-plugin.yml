@@ -1,0 +1,11 @@
+name: GamingLoungeMCPlugin
+version: '${version}'
+main: de.jonas.gamingloungemcplugin.GamingLoungeMain
+description: GamingLoungePlugin
+api-version: '1.20'
+authors:
+  - "Jon1Games"
+dependencies:
+  server:
+    Telepads:
+      required: true

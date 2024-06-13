@@ -1,0 +1,81 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group = 'de.jonas'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "papermc-repo"
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
+    maven {
+        url = "https://repo.codemc.org/repository/maven-public/"
+    }
+    /*
+    maven {
+        url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
+    }
+    */
+    /*
+    maven {
+        name "Minecraft"
+        url 'https://libraries.minecraft.net'
+    }
+    */
+    // maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compileOnly "io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT"
+    compileOnly files("build/libs/stuff-3.4.jar")  // -> Stuff API
+    // implementation('com.zaxxer:HikariCP:5.1.0')   // -> Database
+    /* Maria DB driver
+    implementation('org.mariadb.jdbc:mariadb-java-client:3.3.2') {
+        exclude group: 'com.github.waffle', module: 'waffle-jna'
+    }
+    */
+    implementation "dev.jorel:commandapi-bukkit-shade:9.3.0"   // -> Commands
+    // implementation 'com.mojang:authlib:1.5.25'  // -> gameprofieles
+    // compileOnly 'net.luckperms:api:5.4'   // -> LuckpermsAPI
+    // compileOnly 'me.clip:placeholderapi:2.11.5'  // -> placeholderAPI
+    // compileOnly("com.github.MilkBowl:VaultAPI:1.7")   // --> VaultAPI
+}
+
+def targetJavaVersion = 17
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release.set(targetJavaVersion)
+    }
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('paper-plugin.yml') {
+        expand props
+    }
+}
+
+shadowJar {
+    archiveBaseName.set('GamingLoungeMCPlugin')
+    archiveClassifier.set('')
+    relocate("dev.jorel.commandapi", "de.jonas.gamingloungemcplugin.commandapi")
+}
