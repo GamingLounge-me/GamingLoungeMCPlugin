@@ -15,13 +15,27 @@ import de.jonas.gamingloungemcplugin.quests.FishingQuestTwo;
 
 public class Questst {
 
+    public static final NamespacedKey telepad = new NamespacedKey("gamingloungequestsindex", "telepad");
+    public static final NamespacedKey fish = new NamespacedKey("gamingloungequestsindex", "fish");
+
     List<ItemStack> list;
 
     public Questst(Player p) {
+        PersistentDataContainer container = p.getPersistentDataContainer();
         list = new ArrayList<>();
-        list.add(new CraftTelepadQuest().getItem());
-        if (cooldown(p.getPersistentDataContainer(), FishingQuestOne.lastDone, 60)) list.add(new FishingQuestOne().getItem());
-        if (p.getPersistentDataContainer().has(FishingQuestOne.doneOnce)) list.add(new FishingQuestTwo().getItem());
+        if (
+            cooldown(container, CraftTelepadQuest.lastDone, 60) &&
+            !container.get(telepad, PersistentDataType.BOOLEAN)
+        ) list.add(new CraftTelepadQuest().getItem());
+        if (
+            cooldown(container, FishingQuestOne.lastDone, 60) &&
+            !container.get(fish, PersistentDataType.BOOLEAN)
+        ) list.add(new FishingQuestOne().getItem());
+        if (
+            container.has(FishingQuestOne.doneOnce) &&
+            cooldown(container, FishingQuestTwo.lastDone, 60) &&
+            !container.get(fish, PersistentDataType.BOOLEAN)
+            ) list.add(new FishingQuestTwo().getItem());
     }
 
     public List<ItemStack> getQuests() {

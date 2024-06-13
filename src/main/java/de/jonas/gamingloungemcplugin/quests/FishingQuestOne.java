@@ -7,6 +7,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
+import de.jonas.gamingloungemcplugin.Questst;
 import de.jonas.stuff.Stuff;
 import de.jonas.stuff.interfaced.ClickEvent;
 import de.jonas.stuff.utility.ItemBuilder;
@@ -39,6 +40,7 @@ public class FishingQuestOne {
         Player p = (Player) e.getWhoClicked();
         p.closeInventory();
         p.getPersistentDataContainer().set(onQuest, PersistentDataType.INTEGER, 0);
+        p.getPersistentDataContainer().set(Questst.fish, PersistentDataType.BOOLEAN, true);
         p.sendMessage("ok");
     }
 
@@ -46,6 +48,7 @@ public class FishingQuestOne {
         MiniMessage mm = MiniMessage.miniMessage();
         p.getPersistentDataContainer().set(doneOnce, PersistentDataType.BOOLEAN, true);
         p.getPersistentDataContainer().set(lastDone, PersistentDataType.LONG, System.currentTimeMillis());
+        p.getPersistentDataContainer().set(Questst.fish, PersistentDataType.BOOLEAN, false);
         p.sendMessage(mm.deserialize("Fertig"));
     }
 
