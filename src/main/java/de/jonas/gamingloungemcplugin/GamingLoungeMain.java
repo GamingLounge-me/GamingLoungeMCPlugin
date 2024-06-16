@@ -9,6 +9,7 @@ import de.jonas.gamingloungemcplugin.commands.AdminDebug;
 import de.jonas.gamingloungemcplugin.commands.OpenMenu;
 import de.jonas.gamingloungemcplugin.commands.OpenQuests;
 import de.jonas.gamingloungemcplugin.commands.OpenSmith;
+import de.jonas.gamingloungemcplugin.commands.SubmitQuests;
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
 
@@ -29,6 +30,7 @@ public class GamingLoungeMain extends JavaPlugin{
         new OpenSmith();
         new OpenMenu();
         new OpenQuests();
+        new SubmitQuests();
     }
 
     @Override
@@ -38,7 +40,6 @@ public class GamingLoungeMain extends JavaPlugin{
 
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new QuestsListener(), this);
-
     }
 
     public void onDiable() {

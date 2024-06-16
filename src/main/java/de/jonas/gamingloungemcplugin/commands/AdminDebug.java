@@ -4,6 +4,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import de.jonas.gamingloungemcplugin.quests.FishingQuestOne;
+import de.jonas.gamingloungemcplugin.quests.MiningQuestOne;
 import de.jonas.stuff.commandapi.CommandAPICommand;
 import net.kyori.adventure.text.Component;
 
@@ -24,6 +25,13 @@ public class AdminDebug {
                 .executesPlayer((player, commandArguments) -> {
                     PersistentDataContainer container = player.getPersistentDataContainer();
                     container.remove(FishingQuestOne.doneOnce);
+                })
+                )
+                .withSubcommand(new CommandAPICommand("hasMiningOne")
+                .executesPlayer((player, commandArguments) -> {
+                    if (player.getPersistentDataContainer().has(MiningQuestOne.onQuest)) {
+                        player.sendMessage("true");
+                    } else player.sendMessage("false");
                 })
                 )
             .register();

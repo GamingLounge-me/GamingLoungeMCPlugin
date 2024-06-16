@@ -13,7 +13,7 @@ public final class CustomItemsIndex {
     
     public CustomItemsIndex() {
         list = new ArrayList<>();
-        list.add(new Telepad().getItemForGui());
+        list.add(Telepad.getItemForGui());
     }
     
     public List<ItemStack> getAll() {

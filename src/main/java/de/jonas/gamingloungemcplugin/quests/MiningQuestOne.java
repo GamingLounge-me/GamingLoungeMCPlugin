@@ -12,25 +12,26 @@ import de.jonas.stuff.Stuff;
 import de.jonas.stuff.interfaced.ClickEvent;
 import de.jonas.stuff.utility.ItemBuilder;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+
+public class MiningQuestOne {
     
-public class FishingQuestTwo {
+    private static final ClickEvent CLICK = MiningQuestOne::click;
 
-    private static final ClickEvent CLICK = FishingQuestTwo::click;
+    public static final NamespacedKey onQuest = new NamespacedKey("gamingloungequest", "mining_one");
+    public static final NamespacedKey lastDone = new NamespacedKey("gamingloungequest", "mining_one_last_done");
+    public static final NamespacedKey doneOnce = new NamespacedKey("gamingloungequest", "mining_one_done_once");
 
-    public static final NamespacedKey onQuest = new NamespacedKey("gamingloungequest", "fishing_two");
-    public static final NamespacedKey lastDone = new NamespacedKey("gamingloungequest", "fishing_two_last_done");
-    public static final NamespacedKey doneOnce = new NamespacedKey("gamingloungequest", "fishing_two_done_two");
-
-    public FishingQuestTwo() {
-        Stuff.INSTANCE.itemBuilderManager.addClickEvent(CLICK, "GamingLoungeQuest:fishing_two");
+    public MiningQuestOne() {
+        Stuff.INSTANCE.itemBuilderManager.addClickEvent(CLICK, "GamingLoungeQuest:mining_one");
     }
 
     public ItemStack getItem() {
         return new ItemBuilder()
         .setMaterial(Material.FISHING_ROD)
-        .setName("Der Angler [II]")
-        .addLoreLine("Angle 50 Fische")
-        .whenClicked("GamingLoungeQuest:fishing_two")
+        .setName("Der Miner [I]")
+        .addLoreLine("Samle 16 Eisen (Gescmolzen)")
+        .addLoreLine("Dieses wird dir endfernt!")
+        .whenClicked("GamingLoungeQuest:mining_one")
         .build();
     }
 
@@ -38,8 +39,8 @@ public class FishingQuestTwo {
         e.setCancelled(true);
         Player p = (Player) e.getWhoClicked();
         p.closeInventory();
-        p.getPersistentDataContainer().set(onQuest, PersistentDataType.INTEGER, 0);
-        p.getPersistentDataContainer().set(Questst.fish, PersistentDataType.BOOLEAN, true);
+        p.getPersistentDataContainer().set(onQuest, PersistentDataType.BOOLEAN, true);
+        p.getPersistentDataContainer().set(Questst.mining, PersistentDataType.BOOLEAN, true);
         p.sendMessage("ok");
     }
 
@@ -47,11 +48,9 @@ public class FishingQuestTwo {
         MiniMessage mm = MiniMessage.miniMessage();
         p.getPersistentDataContainer().set(doneOnce, PersistentDataType.BOOLEAN, true);
         p.getPersistentDataContainer().set(lastDone, PersistentDataType.LONG, System.currentTimeMillis());
-        p.getPersistentDataContainer().remove(Questst.fish);
+        p.getPersistentDataContainer().remove(Questst.mining);
         p.getPersistentDataContainer().remove(onQuest);
         p.sendMessage(mm.deserialize("Fertig"));
     }
 
 }
-    
-    

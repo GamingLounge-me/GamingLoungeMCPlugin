@@ -48,7 +48,7 @@ public class Events {
             removeItem(inv, 1, Material.COMPASS) &&
             removeItem(inv, 1, Material.ENDER_EYE)
             ) {
-                inv.addItem(new Telepad().getItem());
+                inv.addItem(Telepad.getItem());
                 if (
                     p.getPersistentDataContainer().has(CraftTelepadQuest.onQuest) &&
                     p.getPersistentDataContainer().get(CraftTelepadQuest.onQuest, PersistentDataType.BOOLEAN) == true
@@ -66,6 +66,20 @@ public class Events {
         e.setCancelled(true);
         e.getWhoClicked().closeInventory();
         Bukkit.dispatchCommand(e.getWhoClicked(), "pad");
+    }
+
+    public static void craft_chunkloader(InventoryClickEvent e) {
+        e.setCancelled(true);
+        Player p = (Player) e.getWhoClicked();
+        Inventory inv = p.getInventory();
+        if (p.getInventory().firstEmpty() == -1) noInvSpace(p);
+        else if (
+            inv.contains(Material.NETHER_STAR, 1) &&
+            inv.contains(Material.REDSTONE_BLOCK, 16) &&
+            removeItem(inv, 1, Material.NETHER_STAR) &&
+            removeItem(inv, 16, Material.REDSTONE_BLOCK)
+            ) Bukkit.getScheduler().runTaskLater(GamingLoungeMain.INSTANCE, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wildloaders:loader give " + p.getName() +" normal_loader 1"), 0);
+        else noMaterials(p);
     }
 
     // Remove item

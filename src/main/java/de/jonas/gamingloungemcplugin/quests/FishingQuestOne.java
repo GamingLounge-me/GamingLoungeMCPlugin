@@ -35,7 +35,6 @@ public class FishingQuestOne {
     }
 
     private static void click(InventoryClickEvent e) {
-        MiniMessage mm = MiniMessage.miniMessage();
         e.setCancelled(true);
         Player p = (Player) e.getWhoClicked();
         p.closeInventory();
@@ -48,7 +47,8 @@ public class FishingQuestOne {
         MiniMessage mm = MiniMessage.miniMessage();
         p.getPersistentDataContainer().set(doneOnce, PersistentDataType.BOOLEAN, true);
         p.getPersistentDataContainer().set(lastDone, PersistentDataType.LONG, System.currentTimeMillis());
-        p.getPersistentDataContainer().set(Questst.fish, PersistentDataType.BOOLEAN, false);
+        p.getPersistentDataContainer().remove(Questst.fish);
+        p.getPersistentDataContainer().remove(onQuest);
         p.sendMessage(mm.deserialize("Fertig"));
     }
 
