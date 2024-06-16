@@ -21,12 +21,14 @@ public class Events {
     private static final ClickEvent CANCEL_CLICK_EVENT = Events::cancelInventoryClickEventI;
     private static final ClickEvent CLOSE_CLICK_EVENT = Events::closeInventoryOnClickI;
     private static final ClickEvent OPEN_MOBILE_TELEPAD = Events::openMobileTelepadI;
+    private static final ClickEvent CRAFT_CHUNKLOADER = Events::craft_chunkloaderI;
 
     public Events() {
         Stuff.INSTANCE.itemBuilderManager.addClickEvent(CANCEL_CLICK_EVENT, "GamingLoungeplugin:cancel_click_event");
         Stuff.INSTANCE.itemBuilderManager.addClickEvent(CRAFT_TELEPAD, "GamingLoungePlugin:craft_telepad");
         Stuff.INSTANCE.itemBuilderManager.addClickEvent(CLOSE_CLICK_EVENT, "GamingLoungePlugin:close_click_event");
         Stuff.INSTANCE.itemBuilderManager.addClickEvent(OPEN_MOBILE_TELEPAD, "GamingLoungePlugin:open_mobile_telepad");
+        Stuff.INSTANCE.itemBuilderManager.addClickEvent(CRAFT_CHUNKLOADER, "GamingLoungePlugin:craft_chunkloader");
     }
 
     public static void cancelInventoryClickEventI(InventoryClickEvent e) {
@@ -68,7 +70,7 @@ public class Events {
         Bukkit.dispatchCommand(e.getWhoClicked(), "pad");
     }
 
-    public static void craft_chunkloader(InventoryClickEvent e) {
+    public static void craft_chunkloaderI(InventoryClickEvent e) {
         e.setCancelled(true);
         Player p = (Player) e.getWhoClicked();
         Inventory inv = p.getInventory();

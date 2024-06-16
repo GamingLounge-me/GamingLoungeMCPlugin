@@ -19,7 +19,7 @@ public class ChunkLoader {
         .addLoreLine("Material kosten:")
         .addLoreLine("1x Netherstar")
         .addLoreLine("16x Redstoneblöcke")
-        .whenClicked("telepads:chunk_loader_craft")
+        .whenClicked("GamingLoungePlugin:craft_chunkloader")
         .build();
     }
     

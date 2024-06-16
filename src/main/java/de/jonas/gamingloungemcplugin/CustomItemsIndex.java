@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.inventory.ItemStack;
 
+import de.jonas.gamingloungemcplugin.customitems.ChunkLoader;
 import de.jonas.gamingloungemcplugin.customitems.Telepad;
 
 public final class CustomItemsIndex {
@@ -14,6 +15,7 @@ public final class CustomItemsIndex {
     public CustomItemsIndex() {
         list = new ArrayList<>();
         list.add(Telepad.getItemForGui());
+        list.add(ChunkLoader.getItemForGui());
     }
     
     public List<ItemStack> getAll() {
