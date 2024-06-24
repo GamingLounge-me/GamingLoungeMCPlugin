@@ -5,7 +5,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 import de.jonas.gamingloungemcplugin.quests.FishingQuestOne;
 import de.jonas.gamingloungemcplugin.quests.MiningQuestOne;
-import de.jonas.stuff.commandapi.CommandAPICommand;
+import dev.jorel.commandapi.CommandAPICommand;
 import net.kyori.adventure.text.Component;
 
 public class AdminDebug {

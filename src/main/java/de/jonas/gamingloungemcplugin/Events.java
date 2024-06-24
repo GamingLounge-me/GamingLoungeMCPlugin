@@ -31,13 +31,13 @@ public class Events {
         Stuff.INSTANCE.itemBuilderManager.addClickEvent(CRAFT_CHUNKLOADER, "GamingLoungePlugin:craft_chunkloader");
     }
 
-    public static void cancelInventoryClickEventI(InventoryClickEvent e) {
+    private static void cancelInventoryClickEventI(InventoryClickEvent e) {
         if (e.getInventory().getHolder() instanceof PagenationInventory) {
             e.setCancelled(true);
         }
     }
 
-    public static void craftTelepadI(InventoryClickEvent e) {
+    private static void craftTelepadI(InventoryClickEvent e) {
         e.setCancelled(true);
         Player p = (Player) e.getWhoClicked();
         Inventory inv = p.getInventory();
@@ -59,18 +59,18 @@ public class Events {
         else noMaterials(p);
     }
 
-    public static void closeInventoryOnClickI(InventoryClickEvent e) {
+    private static void closeInventoryOnClickI(InventoryClickEvent e) {
         e.setCancelled(true);
         e.getWhoClicked().closeInventory();
     }
 
-    public static void openMobileTelepadI(InventoryClickEvent e) {
+    private static void openMobileTelepadI(InventoryClickEvent e) {
         e.setCancelled(true);
         e.getWhoClicked().closeInventory();
         Bukkit.dispatchCommand(e.getWhoClicked(), "pad");
     }
 
-    public static void craft_chunkloaderI(InventoryClickEvent e) {
+    private static void craft_chunkloaderI(InventoryClickEvent e) {
         e.setCancelled(true);
         Player p = (Player) e.getWhoClicked();
         Inventory inv = p.getInventory();
@@ -86,7 +86,7 @@ public class Events {
 
     // Remove item
 
-    public boolean removeItem(Inventory inv, int amount, ItemStack item) {
+    private boolean removeItem(Inventory inv, int amount, ItemStack item) {
         if (inv.contains(item, amount)) {
             for (ItemStack a : inv.getContents()) {
                 if (a == null) continue;
@@ -106,7 +106,7 @@ public class Events {
         return false;
     }
 
-    public static boolean removeItem(Inventory inv, int amount, Material material) {
+    private static boolean removeItem(Inventory inv, int amount, Material material) {
         if (inv.contains(material, amount)) {
             for (ItemStack a : inv.getContents()) {
                 if (a == null) continue;
@@ -128,12 +128,12 @@ public class Events {
 
     // Error messages
 
-    public static void noInvSpace(Player p) {
+    private static void noInvSpace(Player p) {
         MiniMessage mm = MiniMessage.miniMessage();
         p.sendMessage(mm.deserialize("<red>Du hast nicht genügend Platz im Inventar.</red>"));
     }
 
-    public static void noMaterials(Player p) {
+    private static void noMaterials(Player p) {
         MiniMessage mm = MiniMessage.miniMessage();
         p.sendMessage(mm.deserialize("<red>Du hast nicht genügend Materialien im Inventar.</red>"));
     }

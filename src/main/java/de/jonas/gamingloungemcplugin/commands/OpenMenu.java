@@ -1,7 +1,7 @@
 package de.jonas.gamingloungemcplugin.commands;
 
 import de.jonas.gamingloungemcplugin.gui.Menu;
-import de.jonas.stuff.commandapi.CommandAPICommand;
+import dev.jorel.commandapi.CommandAPICommand;
 
 public class OpenMenu {
     

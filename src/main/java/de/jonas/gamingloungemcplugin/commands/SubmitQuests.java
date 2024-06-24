@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 
 import de.jonas.gamingloungemcplugin.quests.MiningQuestOne;
-import de.jonas.stuff.commandapi.CommandAPICommand;
+import dev.jorel.commandapi.CommandAPICommand;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 
 public class SubmitQuests {

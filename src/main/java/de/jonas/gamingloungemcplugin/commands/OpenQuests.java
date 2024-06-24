@@ -5,8 +5,8 @@ import java.util.List;
 import org.bukkit.inventory.ItemStack;
 
 import de.jonas.gamingloungemcplugin.Questst;
-import de.jonas.stuff.commandapi.CommandAPICommand;
 import de.jonas.stuff.utility.PagenationInventory;
+import dev.jorel.commandapi.CommandAPICommand;
 
 public class OpenQuests {
 
